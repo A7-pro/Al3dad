@@ -1,51 +1,79 @@
-<section id="prayer-times">
-    <h2>مواقيت الصلاة</h2>
+<!DOCTYPE html>
+<html lang="ar">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>العداد - العد التنازلي ومواقيت الصلاة</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <div class="container">
+        <header>
+            <img src="العداد.png" alt="العداد" class="logo">
+            <p>العد التنازلي لشهر رمضان المبارك لعام 2026 ومواقيت الصلاة</p>
+        </header>
 
-    <div class="city">
-        <h3>مكة</h3>
-        <p>أقرب صلاة: <span id="next-prayer-makkah"></span></p>
-        <ul>
-            <li>الفجر: <span id="fajr-makkah"></span></li>
-            <li>الظهر: <span id="dhuhr-makkah"></span></li>
-            <li>العصر: <span id="asr-makkah"></span></li>
-            <li>المغرب: <span id="maghrib-makkah"></span></li>
-            <li>العشاء: <span id="isha-makkah"></span></li>
-        </ul>
+        <section id="countdown">
+            <h2>العد التنازلي لشهر رمضان</h2>
+            <div class="time"><span id="days">00</span> أيام</div>
+            <div class="time"><span id="hours">00</span> ساعات</div>
+            <div class="time"><span id="minutes">00</span> دقائق</div>
+            <div class="time"><span id="seconds">00</span> ثواني</div>
+        </section>
+
+        <section id="prayer-times">
+            <h2>مواقيت الصلاة</h2>
+            
+            <div class="city" id="makkah">
+                <h3>مكة</h3>
+                <p>أقرب صلاة: <span id="next-prayer-makkah">جاري التحديث...</span></p>
+                <ul>
+                    <li>الفجر: <span id="fajr-makkah">جاري التحديث...</span></li>
+                    <li>الظهر: <span id="dhuhr-makkah">جاري التحديث...</span></li>
+                    <li>العصر: <span id="asr-makkah">جاري التحديث...</span></li>
+                    <li>المغرب: <span id="maghrib-makkah">جاري التحديث...</span></li>
+                    <li>العشاء: <span id="isha-makkah">جاري التحديث...</span></li>
+                </ul>
+            </div>
+
+            <div class="city" id="madinah">
+                <h3>المدينة المنورة</h3>
+                <p>أقرب صلاة: <span id="next-prayer-madinah">جاري التحديث...</span></p>
+                <ul>
+                    <li>الفجر: <span id="fajr-madinah">جاري التحديث...</span></li>
+                    <li>الظهر: <span id="dhuhr-madinah">جاري التحديث...</span></li>
+                    <li>العصر: <span id="asr-madinah">جاري التحديث...</span></li>
+                    <li>المغرب: <span id="maghrib-madinah">جاري التحديث...</span></li>
+                    <li>العشاء: <span id="isha-madinah">جاري التحديث...</span></li>
+                </ul>
+            </div>
+
+            <div class="city" id="jeddah">
+                <h3>جدة</h3>
+                <p>أقرب صلاة: <span id="next-prayer-jeddah">جاري التحديث...</span></p>
+                <ul>
+                    <li>الفجر: <span id="fajr-jeddah">جاري التحديث...</span></li>
+                    <li>الظهر: <span id="dhuhr-jeddah">جاري التحديث...</span></li>
+                    <li>العصر: <span id="asr-jeddah">جاري التحديث...</span></li>
+                    <li>المغرب: <span id="maghrib-jeddah">جاري التحديث...</span></li>
+                    <li>العشاء: <span id="isha-jeddah">جاري التحديث...</span></li>
+                </ul>
+            </div>
+
+            <div class="city" id="riyadh">
+                <h3>الرياض</h3>
+                <p>أقرب صلاة: <span id="next-prayer-riyadh">جاري التحديث...</span></p>
+                <ul>
+                    <li>الفجر: <span id="fajr-riyadh">جاري التحديث...</span></li>
+                    <li>الظهر: <span id="dhuhr-riyadh">جاري التحديث...</span></li>
+                    <li>العصر: <span id="asr-riyadh">جاري التحديث...</span></li>
+                    <li>المغرب: <span id="maghrib-riyadh">جاري التحديث...</span></li>
+                    <li>العشاء: <span id="isha-riyadh">جاري التحديث...</span></li>
+                </ul>
+            </div>
+        </section>
     </div>
 
-    <div class="city">
-        <h3>المدينة المنورة</h3>
-        <p>أقرب صلاة: <span id="next-prayer-madinah"></span></p>
-        <ul>
-            <li>الفجر: <span id="fajr-madinah"></span></li>
-            <li>الظهر: <span id="dhuhr-madinah"></span></li>
-            <li>العصر: <span id="asr-madinah"></span></li>
-            <li>المغرب: <span id="maghrib-madinah"></span></li>
-            <li>العشاء: <span id="isha-madinah"></span></li>
-        </ul>
-    </div>
-
-    <div class="city">
-        <h3>جدة</h3>
-        <p>أقرب صلاة: <span id="next-prayer-jeddah"></span></p>
-        <ul>
-            <li>الفجر: <span id="fajr-jeddah"></span></li>
-            <li>الظهر: <span id="dhuhr-jeddah"></span></li>
-            <li>العصر: <span id="asr-jeddah"></span></li>
-            <li>المغرب: <span id="maghrib-jeddah"></span></li>
-            <li>العشاء: <span id="isha-jeddah"></span></li>
-        </ul>
-    </div>
-
-    <div class="city">
-        <h3>الرياض</h3>
-        <p>أقرب صلاة: <span id="next-prayer-riyadh"></span></p>
-        <ul>
-            <li>الفجر: <span id="fajr-riyadh"></span></li>
-            <li>الظهر: <span id="dhuhr-riyadh"></span></li>
-            <li>العصر: <span id="asr-riyadh"></span></li>
-            <li>المغرب: <span id="maghrib-riyadh"></span></li>
-            <li>العشاء: <span id="isha-riyadh"></span></li>
-        </ul>
-    </div>
-</section>
+    <script src="script.js"></script>
+</body>
+</html>
