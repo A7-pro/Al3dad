@@ -1,4 +1,4 @@
-// تحديد تاريخ بداية رمضان لعام 2026
+// تحديد تاريخ بداية رمضان 2026
 const ramadanDate = new Date("February 18, 2026 00:00:00").getTime();
 
 function updateCountdown() {
@@ -20,7 +20,7 @@ function updateCountdown() {
 setInterval(updateCountdown, 1000);
 updateCountdown();
 
-// قائمة المدن
+// المدن المتاحة
 const cities = {
     makkah: "Mecca",
     madinah: "Medina",
@@ -28,9 +28,10 @@ const cities = {
     riyadh: "Riyadh"
 };
 
-// استخدام تقويم أم القرى
+// رابط API لمواقيت الصلاة باستخدام تقويم أم القرى
 const apiURL = "https://api.aladhan.com/v1/timingsByCity?city={city}&country=SA&method=4";
 
+// جلب مواقيت الصلاة من API
 async function fetchPrayerTimes(cityKey) {
     const city = cities[cityKey];
     const url = apiURL.replace("{city}", city);
@@ -81,7 +82,7 @@ function calculateNextPrayer(cityKey, timings) {
         const prayerTime = new Date(now);
         prayerTime.setHours(hours, minutes, 0);
 
-        const timeDiff = (prayerTime - now) / 1000;
+        const timeDiff = (prayerTime - now) / 1000; // تحويل الفرق إلى ثواني
         if (timeDiff > 0 && timeDiff < nextTimeDiff) {
             nextTimeDiff = timeDiff;
             nextPrayer = `${prayer.name} بعد ${Math.floor(timeDiff / 3600)} ساعة و ${Math.floor((timeDiff % 3600) / 60)} دقيقة و ${Math.floor(timeDiff % 60)} ثانية`;
@@ -91,5 +92,5 @@ function calculateNextPrayer(cityKey, timings) {
     document.getElementById(`next-prayer-${cityKey}`).innerText = nextPrayer;
 }
 
-// تحديث مواقيت الصلاة تلقائيًا
+// تحديث مواقيت الصلاة لكل مدينة
 Object.keys(cities).forEach(fetchPrayerTimes);
