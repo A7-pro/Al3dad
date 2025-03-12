@@ -20,13 +20,16 @@ function updateCountdown() {
 setInterval(updateCountdown, 1000);
 updateCountdown();
 
-// جلب مواقيت الصلاة تلقائيًا من API
+// المدن المستخدمة مع API
 const cities = {
     makkah: "Mecca",
-    madinah: "Medina"
+    madinah: "Medina",
+    jeddah: "Jeddah",
+    riyadh: "Riyadh"
 };
 
-const apiURL = "https://api.aladhan.com/v1/timingsByCity?city={city}&country=SA&method=2";
+// استخدام تقويم أم القرى
+const apiURL = "https://api.aladhan.com/v1/timingsByCity?city={city}&country=SA&method=4";
 
 async function fetchPrayerTimes(cityKey) {
     const city = cities[cityKey];
@@ -36,38 +39,54 @@ async function fetchPrayerTimes(cityKey) {
         const data = await response.json();
         const timings = data.data.timings;
 
-        document.getElementById(`fajr-${cityKey}`).innerText = timings.Fajr;
-        document.getElementById(`dhuhr-${cityKey}`).innerText = timings.Dhuhr;
-        document.getElementById(`asr-${cityKey}`).innerText = timings.Asr;
-        document.getElementById(`maghrib-${cityKey}`).innerText = timings.Maghrib;
-        document.getElementById(`isha-${cityKey}`).innerText = timings.Isha;
+        document.getElementById(`fajr-${cityKey}`).innerText = formatTime(timings.Fajr);
+        document.getElementById(`dhuhr-${cityKey}`).innerText = formatTime(timings.Dhuhr);
+        document.getElementById(`asr-${cityKey}`).innerText = formatTime(timings.Asr);
+        document.getElementById(`maghrib-${cityKey}`).innerText = formatTime(timings.Maghrib);
+        document.getElementById(`isha-${cityKey}`).innerText = formatTime(timings.Isha);
 
         // حساب أقرب صلاة
-        const now = new Date();
-        const prayerTimes = [
-            { name: "الفجر", time: timings.Fajr },
-            { name: "الظهر", time: timings.Dhuhr },
-            { name: "العصر", time: timings.Asr },
-            { name: "المغرب", time: timings.Maghrib },
-            { name: "العشاء", time: timings.Isha }
-        ];
-
-        let nextPrayer = "غير محدد";
-        let nextTimeDiff = Infinity;
-
-        prayerTimes.forEach(prayer => {
-            const prayerTime = new Date(now.toDateString() + " " + prayer.time);
-            const timeDiff = prayerTime - now;
-            if (timeDiff > 0 && timeDiff < nextTimeDiff) {
-                nextTimeDiff = timeDiff;
-                nextPrayer = `${prayer.name} بعد ${Math.floor(timeDiff / (1000 * 60))} دقيقة`;
-            }
-        });
-
-        document.getElementById(`next-prayer-${cityKey}`).innerText = nextPrayer;
+        calculateNextPrayer(cityKey, timings);
     } catch (error) {
         console.error(`خطأ في جلب مواقيت الصلاة لـ ${cityKey}`, error);
     }
+}
+
+// تحويل الوقت إلى 24 ساعة مع "صباحًا" و"مساءً"
+function formatTime(time) {
+    let [hours, minutes] = time.split(":").map(Number);
+    let suffix = hours >= 12 ? "مساءً" : "صباحًا";
+    hours = hours % 24; // التأكد من عدم تجاوز 24 ساعة
+    return `${hours}:${minutes < 10 ? "0" + minutes : minutes} ${suffix}`;
+}
+
+// حساب أقرب صلاة بالثواني
+function calculateNextPrayer(cityKey, timings) {
+    const now = new Date();
+    const prayerTimes = [
+        { name: "الفجر", time: timings.Fajr },
+        { name: "الظهر", time: timings.Dhuhr },
+        { name: "العصر", time: timings.Asr },
+        { name: "المغرب", time: timings.Maghrib },
+        { name: "العشاء", time: timings.Isha }
+    ];
+
+    let nextPrayer = "غير محدد";
+    let nextTimeDiff = Infinity;
+
+    prayerTimes.forEach(prayer => {
+        const [hours, minutes] = prayer.time.split(":").map(Number);
+        const prayerTime = new Date(now);
+        prayerTime.setHours(hours, minutes, 0);
+
+        const timeDiff = (prayerTime - now) / 1000; // حساب الفرق بالثواني
+        if (timeDiff > 0 && timeDiff < nextTimeDiff) {
+            nextTimeDiff = timeDiff;
+            nextPrayer = `${prayer.name} بعد ${Math.floor(timeDiff / 3600)} ساعة و ${Math.floor((timeDiff % 3600) / 60)} دقيقة و ${Math.floor(timeDiff % 60)} ثانية`;
+        }
+    });
+
+    document.getElementById(`next-prayer-${cityKey}`).innerText = nextPrayer;
 }
 
 // تحديث مواقيت الصلاة تلقائيًا
