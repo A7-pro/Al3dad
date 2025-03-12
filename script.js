@@ -23,9 +23,7 @@ updateCountdown();
 // جلب مواقيت الصلاة تلقائيًا من API
 const cities = {
     makkah: "Mecca",
-    madinah: "Medina",
-    jeddah: "Jeddah",
-    riyadh: "Riyadh"
+    madinah: "Medina"
 };
 
 const apiURL = "https://api.aladhan.com/v1/timingsByCity?city={city}&country=SA&method=2";
@@ -36,11 +34,37 @@ async function fetchPrayerTimes(cityKey) {
     try {
         const response = await fetch(url);
         const data = await response.json();
-        document.getElementById(`fajr-${cityKey}`).innerText = data.data.timings.Fajr;
-        document.getElementById(`dhuhr-${cityKey}`).innerText = data.data.timings.Dhuhr;
-        document.getElementById(`asr-${cityKey}`).innerText = data.data.timings.Asr;
-        document.getElementById(`maghrib-${cityKey}`).innerText = data.data.timings.Maghrib;
-        document.getElementById(`isha-${cityKey}`).innerText = data.data.timings.Isha;
+        const timings = data.data.timings;
+
+        document.getElementById(`fajr-${cityKey}`).innerText = timings.Fajr;
+        document.getElementById(`dhuhr-${cityKey}`).innerText = timings.Dhuhr;
+        document.getElementById(`asr-${cityKey}`).innerText = timings.Asr;
+        document.getElementById(`maghrib-${cityKey}`).innerText = timings.Maghrib;
+        document.getElementById(`isha-${cityKey}`).innerText = timings.Isha;
+
+        // حساب أقرب صلاة
+        const now = new Date();
+        const prayerTimes = [
+            { name: "الفجر", time: timings.Fajr },
+            { name: "الظهر", time: timings.Dhuhr },
+            { name: "العصر", time: timings.Asr },
+            { name: "المغرب", time: timings.Maghrib },
+            { name: "العشاء", time: timings.Isha }
+        ];
+
+        let nextPrayer = "غير محدد";
+        let nextTimeDiff = Infinity;
+
+        prayerTimes.forEach(prayer => {
+            const prayerTime = new Date(now.toDateString() + " " + prayer.time);
+            const timeDiff = prayerTime - now;
+            if (timeDiff > 0 && timeDiff < nextTimeDiff) {
+                nextTimeDiff = timeDiff;
+                nextPrayer = `${prayer.name} بعد ${Math.floor(timeDiff / (1000 * 60))} دقيقة`;
+            }
+        });
+
+        document.getElementById(`next-prayer-${cityKey}`).innerText = nextPrayer;
     } catch (error) {
         console.error(`خطأ في جلب مواقيت الصلاة لـ ${cityKey}`, error);
     }
