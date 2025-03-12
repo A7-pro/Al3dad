@@ -1,17 +1,17 @@
-/* استيراد خط أنيق */
+/* استيراد الخط العربي */
 @import url('https://fonts.googleapis.com/css2?family=Cairo:wght@300;400;700&display=swap');
 
-/* ضبط الألوان والخلفية */
+/* خلفية الموقع بنمط فاخر */
 body {
     font-family: 'Cairo', sans-serif;
-    background: url('https://www.toptal.com/designers/subtlepatterns/uploads/golden-waves.png'); /* خلفية بنمط جميل */
+    background: url('https://www.toptal.com/designers/subtlepatterns/uploads/golden-waves.png');
     background-size: cover;
     background-attachment: fixed;
     color: #FFD700;
     text-align: center;
     margin: 0;
     padding: 0;
-    animation: moveBackground 20s linear infinite; /* حركة للخلفية */
+    animation: moveBackground 20s linear infinite;
 }
 
 /* تأثير حركة الخلفية */
@@ -30,7 +30,7 @@ body {
 /* تنسيق الهيدر */
 header {
     padding: 20px;
-    background: rgba(0, 0, 0, 0.8);
+    background: rgba(0, 0, 0, 0.85);
     border-bottom: 2px solid #FFD700;
     box-shadow: 0px 4px 10px rgba(255, 215, 0, 0.5);
 }
@@ -59,7 +59,7 @@ p {
     width: 100px;
 }
 
-/* تنسيق مربعات المدن */
+/* تحسين عرض مواقيت الصلاة */
 #prayer-times {
     display: flex;
     justify-content: center;
@@ -68,6 +68,7 @@ p {
     margin-top: 30px;
 }
 
+/* تصميم المربعات الخاصة بكل مدينة */
 .city {
     background: rgba(34, 34, 34, 0.85);
     border: 2px solid #FFD700;
@@ -80,17 +81,20 @@ p {
     backdrop-filter: blur(5px);
 }
 
+/* تأثير عند تمرير الماوس على المدينة */
 .city:hover {
     transform: scale(1.05);
     box-shadow: 0px 0px 20px rgba(255, 215, 0, 0.7);
 }
 
+/* تنسيق اسم المدينة */
 .city h3 {
     font-size: 24px;
     color: #FFD700;
     margin-bottom: 10px;
 }
 
+/* تنسيق أقرب صلاة */
 .city p {
     font-size: 18px;
     color: #FFDD44;
@@ -98,11 +102,13 @@ p {
     margin-bottom: 8px;
 }
 
+/* تحسين عرض القائمة */
 .city ul {
     list-style-type: none;
     padding: 0;
 }
 
+/* تنسيق مواعيد الصلاة */
 .city li {
     font-size: 20px;
     color: #fff;
