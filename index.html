@@ -9,10 +9,9 @@
 <body>
     <div class="container">
         <header>
-            <img src="العداد.png" alt="Logo" class="logo">
+            <img src="العداد.png" alt="العداد" class="logo">
             <p>العد التنازلي لشهر رمضان المبارك لعام 2026 ومواقيت الصلاة</p>
         </header>
-        
         <section id="countdown">
             <h2>العد التنازلي لشهر رمضان</h2>
             <div class="time"><span id="days"></span> أيام</div>
@@ -20,12 +19,11 @@
             <div class="time"><span id="minutes"></span> دقائق</div>
             <div class="time"><span id="seconds"></span> ثواني</div>
         </section>
-
         <section id="prayer-times">
             <h2>مواقيت الصلاة</h2>
-            <p id="next-prayer">جاري حساب أقرب صلاة...</p>
-            <div class="city" id="makkah">
+            <div class="city">
                 <h3>مكة</h3>
+                <p>أقرب صلاة: <span id="next-prayer-makkah"></span></p>
                 <ul>
                     <li>الفجر: <span id="fajr-makkah"></span></li>
                     <li>الظهر: <span id="dhuhr-makkah"></span></li>
@@ -33,10 +31,10 @@
                     <li>المغرب: <span id="maghrib-makkah"></span></li>
                     <li>العشاء: <span id="isha-makkah"></span></li>
                 </ul>
-                <p class="next-prayer-time">أقرب صلاة: <span id="next-makkah"></span></p>
             </div>
-            <div class="city" id="madinah">
+            <div class="city">
                 <h3>المدينة المنورة</h3>
+                <p>أقرب صلاة: <span id="next-prayer-madinah"></span></p>
                 <ul>
                     <li>الفجر: <span id="fajr-madinah"></span></li>
                     <li>الظهر: <span id="dhuhr-madinah"></span></li>
@@ -44,7 +42,6 @@
                     <li>المغرب: <span id="maghrib-madinah"></span></li>
                     <li>العشاء: <span id="isha-madinah"></span></li>
                 </ul>
-                <p class="next-prayer-time">أقرب صلاة: <span id="next-madinah"></span></p>
             </div>
         </section>
     </div>
