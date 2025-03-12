@@ -20,7 +20,7 @@ function updateCountdown() {
 setInterval(updateCountdown, 1000);
 updateCountdown();
 
-// المدن المستخدمة مع API
+// قائمة المدن
 const cities = {
     makkah: "Mecca",
     madinah: "Medina",
@@ -34,6 +34,7 @@ const apiURL = "https://api.aladhan.com/v1/timingsByCity?city={city}&country=SA&
 async function fetchPrayerTimes(cityKey) {
     const city = cities[cityKey];
     const url = apiURL.replace("{city}", city);
+
     try {
         const response = await fetch(url);
         const data = await response.json();
@@ -48,7 +49,8 @@ async function fetchPrayerTimes(cityKey) {
         // حساب أقرب صلاة
         calculateNextPrayer(cityKey, timings);
     } catch (error) {
-        console.error(`خطأ في جلب مواقيت الصلاة لـ ${cityKey}`, error);
+        console.error(`❌ خطأ في جلب مواقيت الصلاة لـ ${cityKey}`, error);
+        document.getElementById(`next-prayer-${cityKey}`).innerText = "⚠️ تعذر جلب البيانات";
     }
 }
 
@@ -56,7 +58,7 @@ async function fetchPrayerTimes(cityKey) {
 function formatTime(time) {
     let [hours, minutes] = time.split(":").map(Number);
     let suffix = hours >= 12 ? "مساءً" : "صباحًا";
-    hours = hours % 24; // التأكد من عدم تجاوز 24 ساعة
+    hours = hours % 24;
     return `${hours}:${minutes < 10 ? "0" + minutes : minutes} ${suffix}`;
 }
 
@@ -71,7 +73,7 @@ function calculateNextPrayer(cityKey, timings) {
         { name: "العشاء", time: timings.Isha }
     ];
 
-    let nextPrayer = "غير محدد";
+    let nextPrayer = "❌ غير محدد";
     let nextTimeDiff = Infinity;
 
     prayerTimes.forEach(prayer => {
@@ -79,7 +81,7 @@ function calculateNextPrayer(cityKey, timings) {
         const prayerTime = new Date(now);
         prayerTime.setHours(hours, minutes, 0);
 
-        const timeDiff = (prayerTime - now) / 1000; // حساب الفرق بالثواني
+        const timeDiff = (prayerTime - now) / 1000;
         if (timeDiff > 0 && timeDiff < nextTimeDiff) {
             nextTimeDiff = timeDiff;
             nextPrayer = `${prayer.name} بعد ${Math.floor(timeDiff / 3600)} ساعة و ${Math.floor((timeDiff % 3600) / 60)} دقيقة و ${Math.floor(timeDiff % 60)} ثانية`;
