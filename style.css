@@ -1,51 +1,93 @@
+/* استيراد خط أنيق */
+@import url('https://fonts.googleapis.com/css2?family=Cairo:wght@300;400;700&display=swap');
+
+/* ضبط الألوان والخلفية */
 body {
-    font-family: 'Arial', sans-serif;
-    background-color: #000;
+    font-family: 'Cairo', sans-serif;
+    background: url('https://www.toptal.com/designers/subtlepatterns/uploads/golden-waves.png'); /* خلفية بنمط جميل */
+    background-size: cover;
+    background-attachment: fixed;
     color: #FFD700;
     text-align: center;
     margin: 0;
     padding: 0;
+    animation: moveBackground 20s linear infinite; /* حركة للخلفية */
 }
 
-.container {
-    padding: 20px;
+/* تأثير حركة الخلفية */
+@keyframes moveBackground {
+    0% { background-position: 0 0; }
+    100% { background-position: 100px 100px; }
 }
 
+/* تنسيق الهيدر */
 header {
-    margin-bottom: 30px;
+    padding: 20px;
+    background: rgba(0, 0, 0, 0.8);
+    border-bottom: 2px solid #FFD700;
+    box-shadow: 0px 4px 10px rgba(255, 215, 0, 0.5);
 }
 
 h1 {
-    font-size: 36px;
-    margin: 0;
+    font-size: 42px;
+    font-weight: bold;
+    color: #FFD700;
+    text-shadow: 2px 2px 5px rgba(255, 215, 0, 0.6);
 }
 
 p {
     font-size: 18px;
-    margin: 5px 0 20px;
+    color: #ddd;
 }
 
-section {
-    margin-bottom: 40px;
+/* تنسيق العد التنازلي */
+#countdown {
+    display: flex;
+    justify-content: center;
+    margin: 30px auto;
+    gap: 20px;
 }
 
-#countdown .time {
-    display: inline-block;
-    margin: 0 10px;
-    font-size: 24px;
+.time {
+    background: rgba(34, 34, 34, 0.9);
+    padding: 15px;
+    font-size: 28px;
+    font-weight: bold;
+    color: #FFD700;
+    border-radius: 8px;
+    box-shadow: 0px 0px 15px rgba(255, 215, 0, 0.4);
+    width: 100px;
+}
+
+/* تنسيق مربعات المدن */
+#prayer-times {
+    display: flex;
+    justify-content: center;
+    flex-wrap: wrap;
+    gap: 20px;
+    margin-top: 30px;
 }
 
 .city {
-    margin: 10px auto;
+    background: rgba(34, 34, 34, 0.85);
     border: 2px solid #FFD700;
     border-radius: 10px;
-    padding: 10px;
-    display: inline-block;
-    width: 200px;
+    padding: 15px;
+    width: 250px;
+    text-align: center;
+    box-shadow: 0px 4px 10px rgba(255, 215, 0, 0.4);
+    transition: transform 0.3s, box-shadow 0.3s;
+    backdrop-filter: blur(5px);
+}
+
+.city:hover {
+    transform: scale(1.05);
+    box-shadow: 0px 0px 20px rgba(255, 215, 0, 0.7);
 }
 
 .city h3 {
-    font-size: 28px;
+    font-size: 24px;
+    color: #FFD700;
     margin-bottom: 10px;
 }
 
@@ -56,5 +98,23 @@ section {
 
 .city li {
     font-size: 20px;
-    margin: 5px 0;
+    color: #fff;
+    padding: 5px 0;
+}
+
+/* تحسين للهواتف */
+@media (max-width: 768px) {
+    #countdown {
+        flex-direction: column;
+    }
+
+    .time {
+        width: 80%;
+        margin: auto;
+    }
+
+    #prayer-times {
+        flex-direction: column;
+        align-items: center;
+    }
 }
