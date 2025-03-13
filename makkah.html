@@ -7,28 +7,23 @@
     <link rel="stylesheet" href="style.css">
 </head>
 <body>
-    <div class="container">
-        <header>
-            <h1>مكة المكرمة 🕋</h1>
-            <img src="https://upload.wikimedia.org/wikipedia/commons/e/ec/Masjid_al-Haram_panorama.JPG" alt="مكة المكرمة" class="city-image">
-            <p>مكة المكرمة هي أقدس مدينة في الإسلام، حيث يقع بها المسجد الحرام والكعبة المشرفة، قبلة المسلمين في الصلاة.</p>
-        </header>
+    <header>
+        <h1>مكة المكرمة</h1>
+        <p>مكة المكرمة، قبلة المسلمين وأقدس مدن الإسلام، تحتوي على المسجد الحرام والكعبة المشرفة.</p>
+    </header>
+    
+    <section id="prayer-times">
+        <h2>مواقيت الصلاة في مكة</h2>
+        <div class="prayer-card">الفجر: <span id="fajr"></span></div>
+        <div class="prayer-card">الظهر: <span id="dhuhr"></span></div>
+        <div class="prayer-card">العصر: <span id="asr"></span></div>
+        <div class="prayer-card">المغرب: <span id="maghrib"></span></div>
+        <div class="prayer-card">العشاء: <span id="isha"></span></div>
+    </section>
 
-        <section id="prayer-times">
-            <h2>🕌 مواقيت الصلاة</h2>
-            <p>أقرب صلاة: <span id="next-prayer-makkah">جاري التحديث...</span></p>
-            <ul>
-                <li>الفجر: <span id="fajr-makkah">جاري التحديث...</span></li>
-                <li>الظهر: <span id="dhuhr-makkah">جاري التحديث...</span></li>
-                <li>العصر: <span id="asr-makkah">جاري التحديث...</span></li>
-                <li>المغرب: <span id="maghrib-makkah">جاري التحديث...</span></li>
-                <li>العشاء: <span id="isha-makkah">جاري التحديث...</span></li>
-            </ul>
-        </section>
-
-        <a href="index.html" class="back-button">🔙 الرجوع</a>
-    </div>
+    <button class="back-button" onclick="window.location.href='index.html'">🔙 الرجوع</button>
 
     <script src="script.js"></script>
+    <script>fetchPrayerTimes('Mecca');</script>
 </body>
 </html>
