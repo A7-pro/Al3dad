@@ -1,4 +1,4 @@
-/* استيراد خط كوفي */
+/* استيراد الخط */
 @import url('https://fonts.googleapis.com/css2?family=Cairo:wght@300;400;700&display=swap');
 
 body {
@@ -11,7 +11,7 @@ body {
     padding: 0;
 }
 
-/* تنسيق الهيدر */
+/* تحسين الهيدر */
 header {
     padding: 15px;
     background: rgba(0, 0, 0, 0.85);
@@ -19,35 +19,40 @@ header {
     box-shadow: 0px 4px 10px rgba(255, 215, 0, 0.5);
 }
 
-/* تنسيق العناوين */
-h1, h2 {
-    color: #FFD700;
-    margin-bottom: 10px;
-}
-
-/* الروابط */
+/* تحسين الروابط */
 a {
     color: #FFD700;
     text-decoration: none;
+    font-size: 15px;
     transition: 0.3s;
 }
-
 a:hover {
     text-decoration: underline;
     color: #ffcc00;
 }
 
-/* تصميم المربعات */
+/* تحسين المربعات */
+.container {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    gap: 10px;
+    margin-top: 20px;
+}
+
+/* تحسين البطاقة */
 .card {
-    background: rgba(34, 34, 34, 0.85);
+    width: 70px;
+    height: 70px;
+    background: rgba(34, 34, 34, 0.9);
     border: 2px solid #FFD700;
-    border-radius: 10px;
-    padding: 10px;
-    width: 120px;  /* تصغير حجم المربع */
+    border-radius: 8px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
     text-align: center;
+    font-size: 12px;
     box-shadow: 0px 4px 10px rgba(255, 215, 0, 0.4);
-    display: inline-block;
-    margin: 10px;
     transition: transform 0.3s, box-shadow 0.3s;
 }
 
@@ -56,14 +61,14 @@ a:hover {
     box-shadow: 0px 0px 15px rgba(255, 215, 0, 0.6);
 }
 
-/* تنسيق زر الرجوع */
+/* تحسين زر الرجوع */
 .back-button {
     background: #FFD700;
     color: #000;
     border: none;
-    padding: 8px 15px;
+    padding: 6px 12px;
     border-radius: 5px;
-    font-size: 16px;
+    font-size: 14px;
     margin-top: 15px;
     cursor: pointer;
     transition: 0.3s;
@@ -73,27 +78,52 @@ a:hover {
     background: #ffcc00;
 }
 
-/* ضبط الهوامش لجعل التصميم متناسقًا مع جميع الأجهزة */
+/* تحسين عرض العداد */
+#countdown {
+    display: flex;
+    justify-content: center;
+    gap: 5px;
+    margin: 20px auto;
+}
+
+.time-box {
+    background: rgba(34, 34, 34, 0.9);
+    padding: 10px;
+    font-size: 15px;
+    font-weight: bold;
+    color: #FFD700;
+    border-radius: 8px;
+    width: 50px;
+    text-align: center;
+}
+
+/* تحسين الفوتر */
+footer {
+    text-align: center;
+    margin-top: 30px;
+    padding: 10px;
+    background: rgba(0, 0, 0, 0.85);
+    color: #FFD700;
+    font-size: 12px;
+    border-top: 2px solid #FFD700;
+}
+
+/* تحسين للأجهزة الصغيرة */
 @media (max-width: 768px) {
     .card {
-        width: 90px;
+        width: 65px;
+        height: 65px;
+        font-size: 11px;
+    }
+    .time-box {
+        width: 45px;
         font-size: 12px;
     }
     h1 {
         font-size: 20px;
     }
     .back-button {
-        font-size: 14px;
-        padding: 6px 12px;
-    }
-}
-
-@media (max-width: 480px) {
-    .card {
-        width: 80px;
-        font-size: 11px;
-    }
-    h1 {
-        font-size: 18px;
+        font-size: 12px;
+        padding: 5px 10px;
     }
 }
