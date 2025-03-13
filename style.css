@@ -1,7 +1,6 @@
-/* استيراد خط عربي فاخر */
+/* استيراد خط كوفي */
 @import url('https://fonts.googleapis.com/css2?family=Cairo:wght@300;400;700&display=swap');
 
-/* إعدادات الصفحة الأساسية */
 body {
     font-family: 'Cairo', sans-serif;
     background: url('الخلفية.png') no-repeat center center fixed;
@@ -12,147 +11,89 @@ body {
     padding: 0;
 }
 
-/* تحسين المربعات */
-.container {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    justify-content: center;
-}
-
-/* تحسين الهيدر */
+/* تنسيق الهيدر */
 header {
+    padding: 15px;
     background: rgba(0, 0, 0, 0.85);
-    padding: 20px;
-    border-bottom: 3px solid #FFD700;
+    border-bottom: 2px solid #FFD700;
     box-shadow: 0px 4px 10px rgba(255, 215, 0, 0.5);
 }
 
-/* تحسين الشعار */
-.logo {
-    width: 150px;
-    display: block;
-    margin: auto;
-}
-
-/* العداد التنازلي */
-#countdown {
-    display: flex;
-    justify-content: center;
-    gap: 15px;
-    margin: 30px auto;
-    flex-wrap: wrap;
-}
-
-.time-box {
-    background: rgba(34, 34, 34, 0.9);
-    padding: 15px;
-    font-size: 24px;
-    font-weight: bold;
+/* تنسيق العناوين */
+h1, h2 {
     color: #FFD700;
-    border-radius: 10px;
-    box-shadow: 0px 0px 10px rgba(255, 215, 0, 0.5);
-    width: 100px;
-    text-align: center;
+    margin-bottom: 10px;
 }
 
-/* تصميم المربعات الرئيسية */
-.card-container {
-    display: flex;
-    flex-wrap: wrap;
-    justify-content: center;
-    gap: 15px;
-    margin-top: 20px;
+/* الروابط */
+a {
+    color: #FFD700;
+    text-decoration: none;
+    transition: 0.3s;
 }
 
+a:hover {
+    text-decoration: underline;
+    color: #ffcc00;
+}
+
+/* تصميم المربعات */
 .card {
     background: rgba(34, 34, 34, 0.85);
     border: 2px solid #FFD700;
-    border-radius: 12px;
-    padding: 15px;
-    width: 250px;
+    border-radius: 10px;
+    padding: 10px;
+    width: 120px;  /* تصغير حجم المربع */
     text-align: center;
-    transition: transform 0.3s, box-shadow 0.3s;
     box-shadow: 0px 4px 10px rgba(255, 215, 0, 0.4);
+    display: inline-block;
+    margin: 10px;
+    transition: transform 0.3s, box-shadow 0.3s;
 }
 
 .card:hover {
     transform: scale(1.05);
-    box-shadow: 0px 0px 20px rgba(255, 215, 0, 0.7);
+    box-shadow: 0px 0px 15px rgba(255, 215, 0, 0.6);
 }
 
-/* تحسين عرض الأيقونات */
-.card img {
-    width: 80px;
-    height: auto;
-    margin-bottom: 10px;
-}
-
-/* تحسين النصوص داخل البطاقات */
-.card h3 {
-    font-size: 22px;
-    color: #FFD700;
-}
-
-/* زر الرجوع */
+/* تنسيق زر الرجوع */
 .back-button {
-    display: block;
-    margin: 20px auto;
-    padding: 12px 20px;
-    font-size: 18px;
-    font-weight: bold;
-    background: #ffffff;
+    background: #FFD700;
     color: #000;
-    border: 2px solid #FFD700;
-    border-radius: 8px;
+    border: none;
+    padding: 8px 15px;
+    border-radius: 5px;
+    font-size: 16px;
+    margin-top: 15px;
     cursor: pointer;
-    transition: background 0.3s, color 0.3s, transform 0.2s;
+    transition: 0.3s;
 }
 
 .back-button:hover {
-    background: #FFD700;
-    color: #000;
-    transform: scale(1.05);
+    background: #ffcc00;
 }
 
-/* تحسين عرض مواقيت الصلاة */
-#prayer-times {
-    display: flex;
-    flex-wrap: wrap;
-    justify-content: center;
-    gap: 15px;
-    margin-top: 20px;
-}
-
-.prayer-card {
-    background: rgba(34, 34, 34, 0.9);
-    padding: 15px;
-    border-radius: 8px;
-    text-align: center;
-    width: 200px;
-    color: #FFD700;
-    font-size: 18px;
-    font-weight: bold;
-    box-shadow: 0px 0px 10px rgba(255, 215, 0, 0.5);
-}
-
-/* الفوتر */
-footer {
-    text-align: center;
-    margin-top: 30px;
-    padding: 15px;
-    background: rgba(0, 0, 0, 0.85);
-    color: #FFD700;
-    font-size: 14px;
-    border-top: 2px solid #FFD700;
-}
-
-/* تحسين للأجهزة الصغيرة */
+/* ضبط الهوامش لجعل التصميم متناسقًا مع جميع الأجهزة */
 @media (max-width: 768px) {
-    .time-box {
-        width: 80px;
-    }
     .card {
-        width: 200px;
+        width: 90px;
+        font-size: 12px;
+    }
+    h1 {
+        font-size: 20px;
+    }
+    .back-button {
+        font-size: 14px;
+        padding: 6px 12px;
+    }
+}
+
+@media (max-width: 480px) {
+    .card {
+        width: 80px;
+        font-size: 11px;
+    }
+    h1 {
+        font-size: 18px;
     }
 }
