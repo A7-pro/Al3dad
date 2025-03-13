@@ -7,59 +7,41 @@
     <link rel="stylesheet" href="style.css">
 </head>
 <body>
-    <div class="container">
-        <header>
-            <img src="العداد.png" alt="العداد" class="logo">
-            <h1>العداد</h1>
-            <p>العد التنازلي لشهر رمضان المبارك لعام 2026 ومواقيت الصلاة</p>
-        </header>
+    <header>
+        <h1>العداد</h1>
+        <p>العد التنازلي لشهر رمضان المبارك لعام 2026 ومواقيت الصلاة</p>
+    </header>
 
-        <!-- العد التنازلي لشهر رمضان -->
-        <section id="countdown">
-            <h2>⏳ العد التنازلي لشهر رمضان</h2>
-            <div class="time"><span id="days">00</span> أيام</div>
-            <div class="time"><span id="hours">00</span> ساعات</div>
-            <div class="time"><span id="minutes">00</span> دقائق</div>
-            <div class="time"><span id="seconds">00</span> ثواني</div>
-        </section>
+    <!-- العد التنازلي لرمضان -->
+    <section id="countdown">
+        <h2>⏳ العد التنازلي لشهر رمضان</h2>
+        <div class="time-box"><span id="days">00</span> يوم</div>
+        <div class="time-box"><span id="hours">00</span> ساعة</div>
+        <div class="time-box"><span id="minutes">00</span> دقيقة</div>
+        <div class="time-box"><span id="seconds">00</span> ثانية</div>
+    </section>
 
-        <!-- مواقيت الصلاة -->
-        <section id="prayer-times">
-            <h2>🕌 مواقيت الصلاة</h2>
-            <div class="city-grid">
-                <a href="makkah.html" class="city-box">
-                    <img src="مكة المكرمة.png" alt="مكة">
-                    <p>مكة</p>
-                </a>
-                <a href="madinah.html" class="city-box">
-                    <img src="المدينة المنورة.png" alt="المدينة">
-                    <p>المدينة المنورة</p>
-                </a>
-                <a href="jeddah.html" class="city-box">
-                    <img src="جدة.png" alt="جدة">
-                    <p>جدة</p>
-                </a>
-                <a href="riyadh.html" class="city-box">
-                    <img src="الرياض.png" alt="الرياض">
-                    <p>الرياض</p>
-                </a>
-            </div>
-        </section>
+    <!-- مواقيت الصلاة -->
+    <section id="prayer-times">
+        <h2>🕌 مواقيت الصلاة</h2>
+        <div class="prayer-card">الفجر: <span id="fajr">جاري التحديث...</span></div>
+        <div class="prayer-card">الظهر: <span id="dhuhr">جاري التحديث...</span></div>
+        <div class="prayer-card">العصر: <span id="asr">جاري التحديث...</span></div>
+        <div class="prayer-card">المغرب: <span id="maghrib">جاري التحديث...</span></div>
+        <div class="prayer-card">العشاء: <span id="isha">جاري التحديث...</span></div>
+    </section>
 
-        <!-- قسم الأذكار -->
-        <section id="azkar-section">
-            <h2>📿 الأذكار</h2>
-            <a href="azkar.html" class="azkar-box">
-                <img src="اذكار.png" alt="الأذكار">
-                <p>عرض جميع الأذكار</p>
-            </a>
-        </section>
+    <!-- روابط المدن -->
+    <section class="container">
+        <div class="card"><a href="makkah.html">مكة</a></div>
+        <div class="card"><a href="madinah.html">المدينة</a></div>
+        <div class="card"><a href="jeddah.html">جدة</a></div>
+        <div class="card"><a href="riyadh.html">الرياض</a></div>
+    </section>
 
-        <!-- الفوتر -->
-        <footer>
-            <p>صنع بحب ❤️ المبرمج <a href="https://t.me/tahikal" target="_blank">عبدالله بن محمد</a></p>
-        </footer>
-    </div>
+    <footer>
+        <p>صنع بحب ❤️ المبرمج <a href="https://t.me/tahikal" target="_blank">عبدالله بن محمد</a></p>
+    </footer>
 
     <script src="script.js"></script>
 </body>
