@@ -7,28 +7,23 @@
     <link rel="stylesheet" href="style.css">
 </head>
 <body>
-    <div class="container">
-        <header>
-            <h1>جدة 🌊</h1>
-            <img src="https://upload.wikimedia.org/wikipedia/commons/1/1a/Jeddah_Corniche.jpg" alt="جدة" class="city-image">
-            <p>جدة هي البوابة الرئيسية للحج والعمرة، وتتميز بكورنيشها الجميل وأسواقها التاريخية.</p>
-        </header>
+    <header>
+        <h1>جدة</h1>
+        <p>بوابة الحرمين الشريفين وأهم المدن الساحلية المطلة على البحر الأحمر.</p>
+    </header>
+    
+    <section id="prayer-times">
+        <h2>مواقيت الصلاة في جدة</h2>
+        <div class="prayer-card">الفجر: <span id="fajr"></span></div>
+        <div class="prayer-card">الظهر: <span id="dhuhr"></span></div>
+        <div class="prayer-card">العصر: <span id="asr"></span></div>
+        <div class="prayer-card">المغرب: <span id="maghrib"></span></div>
+        <div class="prayer-card">العشاء: <span id="isha"></span></div>
+    </section>
 
-        <section id="prayer-times">
-            <h2>🕌 مواقيت الصلاة</h2>
-            <p>أقرب صلاة: <span id="next-prayer-jeddah">جاري التحديث...</span></p>
-            <ul>
-                <li>الفجر: <span id="fajr-jeddah">جاري التحديث...</span></li>
-                <li>الظهر: <span id="dhuhr-jeddah">جاري التحديث...</span></li>
-                <li>العصر: <span id="asr-jeddah">جاري التحديث...</span></li>
-                <li>المغرب: <span id="maghrib-jeddah">جاري التحديث...</span></li>
-                <li>العشاء: <span id="isha-jeddah">جاري التحديث...</span></li>
-            </ul>
-        </section>
-
-        <a href="index.html" class="back-button">🔙 الرجوع</a>
-    </div>
+    <button class="back-button" onclick="window.location.href='index.html'">🔙 الرجوع</button>
 
     <script src="script.js"></script>
+    <script>fetchPrayerTimes('Jeddah');</script>
 </body>
 </html>
