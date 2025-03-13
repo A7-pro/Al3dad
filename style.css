@@ -1,3 +1,7 @@
+/* استيراد الخط العربي */
+@import url('https://fonts.googleapis.com/css2?family=Cairo:wght@300;400;700&display=swap');
+
+/* خلفية الموقع */
 body {
     font-family: 'Cairo', sans-serif;
     background: url('الخلفية.png') no-repeat center center fixed;
@@ -8,15 +12,19 @@ body {
     padding: 0;
 }
 
+/* الشعار */
 .logo {
     width: 180px;
     display: block;
     margin: 20px auto;
 }
 
-h2 {
-    color: #FFD700;
-    font-size: 24px;
+/* العداد التنازلي */
+#countdown {
+    display: flex;
+    justify-content: center;
+    margin: 30px auto;
+    gap: 20px;
 }
 
 .time {
@@ -29,35 +37,53 @@ h2 {
     box-shadow: 0px 0px 15px rgba(255, 215, 0, 0.4);
     width: 100px;
     display: inline-block;
-    margin: 10px;
 }
 
-.city {
+/* مربعات المدن */
+.cities {
+    display: flex;
+    justify-content: center;
+    flex-wrap: wrap;
+    gap: 20px;
+}
+
+.city-box {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
     background: rgba(34, 34, 34, 0.85);
-    border: 2px solid #FFD700;
     border-radius: 10px;
     padding: 15px;
-    width: 250px;
-    text-align: center;
-    box-shadow: 0px 4px 10px rgba(255, 215, 0, 0.4);
-    margin: 20px auto;
+    width: 150px;
+    text-decoration: none;
+    color: white;
+    font-weight: bold;
+    transition: transform 0.3s;
 }
 
-.city h3 {
-    font-size: 24px;
-    color: #FFD700;
+.city-box img {
+    width: 100px;
+    height: 100px;
+    border-radius: 10px;
 }
 
-.city ul {
-    list-style-type: none;
-    padding: 0;
+.city-box:hover {
+    transform: scale(1.1);
 }
 
-.city li {
-    font-size: 20px;
-    color: #fff;
+/* زر تحميل سورة الكهف */
+.download-button {
+    background: gold;
+    padding: 10px 20px;
+    color: black;
+    font-weight: bold;
+    border-radius: 5px;
+    text-decoration: none;
+    display: inline-block;
+    margin-top: 10px;
 }
 
+/* الفوتر */
 footer {
     margin-top: 50px;
     padding: 20px;
