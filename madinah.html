@@ -7,28 +7,23 @@
     <link rel="stylesheet" href="style.css">
 </head>
 <body>
-    <div class="container">
-        <header>
-            <h1>المدينة المنورة 🕌</h1>
-            <img src="https://upload.wikimedia.org/wikipedia/commons/4/49/Al-Masjid_An-Nabawi_by_Night.jpg" alt="المدينة المنورة" class="city-image">
-            <p>المدينة المنورة هي ثاني أقدس مدينة في الإسلام، حيث يقع بها المسجد النبوي الشريف، وهو مقر دفن النبي محمد ﷺ.</p>
-        </header>
+    <header>
+        <h1>المدينة المنورة</h1>
+        <p>تحتضن المسجد النبوي الشريف، ثاني أقدس المساجد في الإسلام، وتاريخها الإسلامي العريق.</p>
+    </header>
+    
+    <section id="prayer-times">
+        <h2>مواقيت الصلاة في المدينة</h2>
+        <div class="prayer-card">الفجر: <span id="fajr"></span></div>
+        <div class="prayer-card">الظهر: <span id="dhuhr"></span></div>
+        <div class="prayer-card">العصر: <span id="asr"></span></div>
+        <div class="prayer-card">المغرب: <span id="maghrib"></span></div>
+        <div class="prayer-card">العشاء: <span id="isha"></span></div>
+    </section>
 
-        <section id="prayer-times">
-            <h2>🕌 مواقيت الصلاة</h2>
-            <p>أقرب صلاة: <span id="next-prayer-madinah">جاري التحديث...</span></p>
-            <ul>
-                <li>الفجر: <span id="fajr-madinah">جاري التحديث...</span></li>
-                <li>الظهر: <span id="dhuhr-madinah">جاري التحديث...</span></li>
-                <li>العصر: <span id="asr-madinah">جاري التحديث...</span></li>
-                <li>المغرب: <span id="maghrib-madinah">جاري التحديث...</span></li>
-                <li>العشاء: <span id="isha-madinah">جاري التحديث...</span></li>
-            </ul>
-        </section>
-
-        <a href="index.html" class="back-button">🔙 الرجوع</a>
-    </div>
+    <button class="back-button" onclick="window.location.href='index.html'">🔙 الرجوع</button>
 
     <script src="script.js"></script>
+    <script>fetchPrayerTimes('Medina');</script>
 </body>
 </html>
