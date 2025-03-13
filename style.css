@@ -117,17 +117,4 @@ p {
 
 /* تحسين للهواتف */
 @media (max-width: 768px) {
-    #countdown {
-        flex-direction: column;
-    }
-
-    .time {
-        width: 80%;
-        margin: auto;
-    }
-
-    #prayer-times {
-        flex-direction: column;
-        align-items: center;
-    }
-}
+    #countdown
