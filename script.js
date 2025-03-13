@@ -20,24 +20,21 @@ function updateCountdown() {
 setInterval(updateCountdown, 1000);
 updateCountdown();
 
-// المدن المتاحة
+// قائمة المدن المتاحة مع الإحداثيات
 const cities = {
-    makkah: "Mecca",
-    madinah: "Medina",
-    jeddah: "Jeddah",
-    riyadh: "Riyadh"
+    makkah: { name: "مكة", lat: 21.3891, lon: 39.8579 },
+    madinah: { name: "المدينة المنورة", lat: 24.4667, lon: 39.6 },
+    jeddah: { name: "جدة", lat: 21.2854, lon: 39.2376 },
+    riyadh: { name: "الرياض", lat: 24.7136, lon: 46.6753 }
 };
 
-// رابط API لمواقيت الصلاة باستخدام تقويم أم القرى
-const apiURL = "https://api.aladhan.com/v1/timingsByCity?city={city}&country=SA&method=4";
-
-// جلب مواقيت الصلاة من API
+// استدعاء مواقيت الصلاة لكل مدينة
 async function fetchPrayerTimes(cityKey) {
     const city = cities[cityKey];
-    const url = apiURL.replace("{city}", city);
+    const apiURL = `https://api.aladhan.com/v1/timings?latitude=${city.lat}&longitude=${city.lon}&method=4`;
 
     try {
-        const response = await fetch(url);
+        const response = await fetch(apiURL);
         const data = await response.json();
         const timings = data.data.timings;
 
@@ -47,19 +44,18 @@ async function fetchPrayerTimes(cityKey) {
         document.getElementById(`maghrib-${cityKey}`).innerText = formatTime(timings.Maghrib);
         document.getElementById(`isha-${cityKey}`).innerText = formatTime(timings.Isha);
 
-        // حساب أقرب صلاة
         calculateNextPrayer(cityKey, timings);
     } catch (error) {
-        console.error(`❌ خطأ في جلب مواقيت الصلاة لـ ${cityKey}`, error);
+        console.error(`❌ خطأ في جلب مواقيت الصلاة لـ ${city.name}`, error);
         document.getElementById(`next-prayer-${cityKey}`).innerText = "⚠️ تعذر جلب البيانات";
     }
 }
 
-// تحويل الوقت إلى 24 ساعة مع "صباحًا" و"مساءً"
+// تحويل الوقت إلى 12 ساعة مع "صباحًا" و"مساءً"
 function formatTime(time) {
     let [hours, minutes] = time.split(":").map(Number);
     let suffix = hours >= 12 ? "مساءً" : "صباحًا";
-    hours = hours % 24;
+    hours = hours % 12 || 12; // تحويل إلى تنسيق 12 ساعة
     return `${hours}:${minutes < 10 ? "0" + minutes : minutes} ${suffix}`;
 }
 
