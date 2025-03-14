@@ -7,23 +7,28 @@
     <link rel="stylesheet" href="style.css">
 </head>
 <body>
-    <header>
-        <h1>جدة</h1>
-        <p>بوابة الحرمين الشريفين وأهم المدن الساحلية المطلة على البحر الأحمر.</p>
-    </header>
-    
-    <section id="prayer-times">
-        <h2>مواقيت الصلاة في جدة</h2>
-        <div class="prayer-card">الفجر: <span id="fajr"></span></div>
-        <div class="prayer-card">الظهر: <span id="dhuhr"></span></div>
-        <div class="prayer-card">العصر: <span id="asr"></span></div>
-        <div class="prayer-card">المغرب: <span id="maghrib"></span></div>
-        <div class="prayer-card">العشاء: <span id="isha"></span></div>
-    </section>
+    <div class="container">
+        <header>
+            <h1>جدة</h1>
+            <p>جدة هي العاصمة الاقتصادية والسياحية للمملكة العربية السعودية، وتعد بوابة الحرمين الشريفين. تشتهر جدة بكورنيشها الجميل، ومعالمها التاريخية، وأسواقها التقليدية، وهي مركز تجاري مهم في المملكة.</p>
+        </header>
 
-    <button class="back-button" onclick="window.location.href='index.html'">🔙 الرجوع</button>
+        <section id="prayer-times">
+            <h2>🕌 مواقيت الصلاة في جدة</h2>
+            <p>الفجر: <span id="fajr-jeddah">جاري التحديث...</span></p>
+            <p>الظهر: <span id="dhuhr-jeddah">جاري التحديث...</span></p>
+            <p>العصر: <span id="asr-jeddah">جاري التحديث...</span></p>
+            <p>المغرب: <span id="maghrib-jeddah">جاري التحديث...</span></p>
+            <p>العشاء: <span id="isha-jeddah">جاري التحديث...</span></p>
+        </section>
+
+        <a href="index.html" class="back-button">🔙 الرجوع</a>
+
+        <footer>
+            <p>صنع بحب ❤️ المبرمج عبدالله بن محمد</p>
+        </footer>
+    </div>
 
     <script src="script.js"></script>
-    <script>fetchPrayerTimes('Jeddah');</script>
 </body>
 </html>
