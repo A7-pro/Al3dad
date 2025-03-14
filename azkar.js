@@ -1,33 +1,43 @@
+// استيراد إعدادات Firebase
+import { database } from "./firebase-config.js";
+import { ref, onValue } from "https://www.gstatic.com/firebasejs/10.7.1/firebase-database.js";
+
 document.addEventListener("DOMContentLoaded", function () {
     const azkarContainer = document.getElementById("azkar-container");
 
-    // قائمة الأذكار بصور محلية
-    const azkarList = [
-        {
-            title: "🌙 أذكار الصباح والمساء",
-            image: "اذكار الصباح والمساء.png"
-        },
-        {
-            title: "🕌 أذكار بعد الصلاة",
-            image: "بعد الصلاة.png"
-        }
-    ];
+    function fetchAzkar() {
+        const azkarRef = ref(database, "azkar");
 
-    // عرض الأذكار على الصفحة
-    azkarContainer.innerHTML = "";
-    azkarList.forEach(zekr => {
-        const zekrCard = document.createElement("div");
-        zekrCard.classList.add("azkar-card");
+        onValue(azkarRef, (snapshot) => {
+            azkarContainer.innerHTML = ""; // مسح المحتوى القديم قبل تحميل الجديد
 
-        const title = document.createElement("h3");
-        title.innerText = zekr.title;
+            if (!snapshot.exists()) {
+                azkarContainer.innerHTML = "<p>❌ لا توجد أذكار متاحة.</p>";
+                return;
+            }
 
-        const image = document.createElement("img");
-        image.src = zekr.image;
-        image.alt = zekr.title;
+            snapshot.forEach(childSnapshot => {
+                const zekr = childSnapshot.val();
 
-        zekrCard.appendChild(title);
-        zekrCard.appendChild(image);
-        azkarContainer.appendChild(zekrCard);
-    });
+                // إنشاء عنصر لعرض الذكر
+                const zekrCard = document.createElement("div");
+                zekrCard.classList.add("azkar-card");
+
+                const title = document.createElement("h3");
+                title.innerText = zekr.title;
+
+                const content = document.createElement("p");
+                content.innerText = zekr.content;
+
+                zekrCard.appendChild(title);
+                zekrCard.appendChild(content);
+                azkarContainer.appendChild(zekrCard);
+            });
+        }, (error) => {
+            console.error("❌ خطأ أثناء تحميل الأذكار:", error);
+            azkarContainer.innerHTML = "<p>⚠️ حدث خطأ أثناء تحميل الأذكار.</p>";
+        });
+    }
+
+    fetchAzkar();
 });
