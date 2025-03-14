@@ -1,5 +1,5 @@
-/* استيراد الخط */
-@import url('https://fonts.googleapis.com/css2?family=Cairo:wght@300;400;700&display=swap');
+/* استيراد الخطوط */
+@import url('https://fonts.googleapis.com/css2?family=Cairo:wght@400;700&display=swap');
 
 body {
     font-family: 'Cairo', sans-serif;
@@ -11,66 +11,103 @@ body {
     padding: 0;
 }
 
-/* تحسين الهيدر */
+/* ✅ تنسيق الهيدر */
 header {
-    padding: 15px;
+    padding: 20px;
     background: rgba(0, 0, 0, 0.85);
     border-bottom: 2px solid #FFD700;
-    box-shadow: 0px 4px 10px rgba(255, 215, 0, 0.5);
 }
 
-/* تحسين الروابط */
-a {
-    color: #FFD700;
-    text-decoration: none;
-    font-size: 15px;
-    transition: 0.3s;
-}
-a:hover {
-    text-decoration: underline;
-    color: #ffcc00;
+.logo {
+    width: 150px;
+    display: block;
+    margin: auto;
 }
 
-/* تحسين المربعات */
-.container {
+h1 {
+    font-size: 28px;
+    font-weight: bold;
+    margin: 10px 0;
+}
+
+/* ✅ العد التنازلي */
+#countdown {
+    margin: 20px auto;
+}
+
+.countdown-container {
     display: flex;
-    flex-wrap: wrap;
     justify-content: center;
+    gap: 10px;
+}
+
+.time-box {
+    background: rgba(34, 34, 34, 0.9);
+    padding: 10px;
+    font-size: 18px;
+    font-weight: bold;
+    color: #FFD700;
+    border-radius: 8px;
+    width: 70px;
+}
+
+/* ✅ مواقيت الصلاة */
+#prayer-times {
+    background: rgba(0, 0, 0, 0.75);
+    padding: 15px;
+    margin-top: 20px;
+    border-radius: 10px;
+}
+
+#next-prayer {
+    font-size: 18px;
+    font-weight: bold;
+}
+
+/* ✅ المربعات الرئيسية */
+.grid-container {
+    display: flex;
+    justify-content: center;
+    flex-wrap: wrap;
     gap: 10px;
     margin-top: 20px;
 }
 
-/* تحسين البطاقة */
-.card {
-    width: 70px;
-    height: 70px;
-    background: rgba(34, 34, 34, 0.9);
+.grid-item {
+    background: rgba(34, 34, 34, 0.85);
     border: 2px solid #FFD700;
-    border-radius: 8px;
-    display: flex;
-    align-items: center;
-    justify-content: center;
+    border-radius: 10px;
+    padding: 10px;
+    width: 70px;
     text-align: center;
-    font-size: 12px;
-    box-shadow: 0px 4px 10px rgba(255, 215, 0, 0.4);
-    transition: transform 0.3s, box-shadow 0.3s;
+    transition: 0.3s;
 }
 
-.card:hover {
+.grid-item:hover {
     transform: scale(1.05);
-    box-shadow: 0px 0px 15px rgba(255, 215, 0, 0.6);
 }
 
-/* تحسين زر الرجوع */
-.back-button {
-    background: #FFD700;
-    color: #000;
-    border: none;
-    padding: 6px 12px;
-    border-radius: 5px;
+.grid-item img {
+    width: 50px;
+    height: 50px;
+}
+
+.grid-item span {
+    display: block;
     font-size: 14px;
-    margin-top: 15px;
-    cursor: pointer;
+    margin-top: 5px;
+}
+
+/* ✅ زر الرجوع */
+.back-button {
+    display: inline-block;
+    background: #FFD700;
+    color: black;
+    padding: 8px 15px;
+    border-radius: 5px;
+    font-weight: bold;
+    margin-top: 20px;
+    text-decoration: none;
     transition: 0.3s;
 }
 
@@ -78,52 +115,65 @@ a:hover {
     background: #ffcc00;
 }
 
-/* تحسين عرض العداد */
-#countdown {
-    display: flex;
-    justify-content: center;
-    gap: 5px;
-    margin: 20px auto;
-}
-
-.time-box {
-    background: rgba(34, 34, 34, 0.9);
-    padding: 10px;
-    font-size: 15px;
-    font-weight: bold;
-    color: #FFD700;
-    border-radius: 8px;
-    width: 50px;
-    text-align: center;
-}
-
-/* تحسين الفوتر */
+/* ✅ الفوتر */
 footer {
-    text-align: center;
     margin-top: 30px;
     padding: 10px;
     background: rgba(0, 0, 0, 0.85);
-    color: #FFD700;
-    font-size: 12px;
     border-top: 2px solid #FFD700;
 }
 
-/* تحسين للأجهزة الصغيرة */
+footer p {
+    font-size: 14px;
+    color: white;
+}
+
+/* ✅ تنسيق تسجيل الدخول للمطور */
+.login-container {
+    width: 250px;
+    margin: auto;
+    padding: 20px;
+    background: rgba(0, 0, 0, 0.75);
+    border-radius: 10px;
+}
+
+.login-container input {
+    width: 100%;
+    padding: 8px;
+    margin: 5px 0;
+    border-radius: 5px;
+    border: none;
+    font-size: 16px;
+}
+
+.login-container button {
+    background: #FFD700;
+    color: black;
+    padding: 10px;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    font-size: 16px;
+    width: 100%;
+}
+
+.login-container button:hover {
+    background: #ffcc00;
+}
+
+/* ✅ تحسين للجوال */
 @media (max-width: 768px) {
-    .card {
-        width: 65px;
-        height: 65px;
-        font-size: 11px;
+    .countdown-container {
+        flex-direction: column;
     }
+
     .time-box {
-        width: 45px;
-        font-size: 12px;
+        width: 80%;
+        margin: auto;
     }
-    h1 {
-        font-size: 20px;
-    }
-    .back-button {
-        font-size: 12px;
-        padding: 5px 10px;
+
+    .grid-container {
+        flex-direction: column;
+        align-items: center;
     }
 }
