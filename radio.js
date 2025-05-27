@@ -8,7 +8,14 @@ document.addEventListener("DOMContentLoaded", function() {
     async function loadRadioStations() {
         try {
             const response = await fetch(RADIO_API);
-            const stations = await response.json();
+            const data = await response.json();
+            
+            // Ensure we have an array of stations
+            const stations = Array.isArray(data) ? data : data.stations || [];
+            
+            if (stations.length === 0) {
+                throw new Error("لم يتم العثور على محطات إذاعية");
+            }
             
             stations.forEach(station => {
                 const option = document.createElement("option");
@@ -18,6 +25,8 @@ document.addEventListener("DOMContentLoaded", function() {
             });
         } catch (error) {
             console.error("خطأ في تحميل قائمة القراء:", error);
+            // Display error message to user
+            radioSelect.innerHTML = '<option value="">خطأ في تحميل المحطات</option>';
         }
     }
 
