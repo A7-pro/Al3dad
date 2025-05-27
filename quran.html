@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="ar">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>القرآن الكريم</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <div class="container">
+        <header>
+            <h1>📖 القرآن الكريم</h1>
+            <p>اختر السورة التي تريد قراءتها</p>
+        </header>
+
+        <section id="quran-section">
+            <select id="surah-select">
+                <option value="">اختر السورة</option>
+            </select>
+            <div id="surah-content" class="content-display"></div>
+            <audio id="quran-player" controls></audio>
+            <select id="reciter-select">
+                <option value="">اختر القارئ</option>
+            </select>
+        </section>
+
+        <a href="index.html" class="back-button">🔙 الرجوع</a>
+
+        <footer>
+            <p>صنع بحب ❤️ المبرمج عبدالله بن محمد</p>
+        </footer>
+    </div>
+
+    <script src="quran.js"></script>
+</body>
+</html>

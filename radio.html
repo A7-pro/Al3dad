@@ -3,20 +3,21 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>الأذكار</title>
+    <title>إذاعة القرآن</title>
     <link rel="stylesheet" href="style.css">
 </head>
 <body>
     <div class="container">
         <header>
-            <h1>📿 الأذكار</h1>
-            <p>أذكار الصباح والمساء وأذكار متنوعة</p>
+            <h1>📻 إذاعة القرآن</h1>
+            <p>استمع إلى تلاوات القرآن الكريم</p>
         </header>
 
-        <section id="azkar-section">
-            <div id="azkar-content" class="content-display"></div>
-            <button id="prev-zekr" class="nav-button">الذكر السابق</button>
-            <button id="next-zekr" class="nav-button">الذكر التالي</button>
+        <section id="radio-section">
+            <select id="radio-select">
+                <option value="">اختر القارئ</option>
+            </select>
+            <audio id="radio-player" controls></audio>
         </section>
 
         <a href="index.html" class="back-button">🔙 الرجوع</a>
@@ -26,6 +27,6 @@
         </footer>
     </div>
 
-    <script src="azkar.js"></script>
+    <script src="radio.js"></script>
 </body>
 </html>
