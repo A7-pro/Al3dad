@@ -10,10 +10,15 @@ function updateCountdown() {
     const minutes = Math.floor((timeLeft % (1000 * 60 * 60)) / (1000 * 60));
     const seconds = Math.floor((timeLeft % (1000 * 60)) / 1000);
 
-    document.getElementById("days").innerText = days;
-    document.getElementById("hours").innerText = hours;
-    document.getElementById("minutes").innerText = minutes;
-    document.getElementById("seconds").innerText = seconds;
+    const daysElement = document.getElementById("days");
+    const hoursElement = document.getElementById("hours");
+    const minutesElement = document.getElementById("minutes");
+    const secondsElement = document.getElementById("seconds");
+
+    if (daysElement) daysElement.innerText = days;
+    if (hoursElement) hoursElement.innerText = hours;
+    if (minutesElement) minutesElement.innerText = minutes;
+    if (secondsElement) secondsElement.innerText = seconds;
 }
 
 // ✅ تحديث العداد كل ثانية
@@ -22,10 +27,10 @@ updateCountdown();
 
 // ✅ قائمة المدن المتاحة
 const cities = {
-    makkah: "Mecca",
-    madinah: "Medina",
-    jeddah: "Jeddah",
-    riyadh: "Riyadh"
+    makkah: { name: "Mecca", arabicName: "مكة المكرمة" },
+    madinah: { name: "Medina", arabicName: "المدينة المنورة" },
+    jeddah: { name: "Jeddah", arabicName: "جدة" },
+    riyadh: { name: "Riyadh", arabicName: "الرياض" }
 };
 
 // ✅ رابط API لمواقيت الصلاة (تقويم أم القرى)
@@ -33,30 +38,49 @@ const apiURL = "https://api.aladhan.com/v1/timingsByCity?city={city}&country=SA&
 
 // ✅ جلب مواقيت الصلاة لكل مدينة
 async function fetchPrayerTimes(cityKey) {
-    const city = cities[cityKey];
+    const city = cities[cityKey].name;
     const url = apiURL.replace("{city}", city);
 
     try {
         const response = await fetch(url);
+        if (!response.ok) {
+            throw new Error(`HTTP error! status: ${response.status}`);
+        }
         const data = await response.json();
         const timings = data.data.timings;
 
-        document.getElementById(`fajr-${cityKey}`).innerText = formatTime(timings.Fajr);
-        document.getElementById(`dhuhr-${cityKey}`).innerText = formatTime(timings.Dhuhr);
-        document.getElementById(`asr-${cityKey}`).innerText = formatTime(timings.Asr);
-        document.getElementById(`maghrib-${cityKey}`).innerText = formatTime(timings.Maghrib);
-        document.getElementById(`isha-${cityKey}`).innerText = formatTime(timings.Isha);
+        // تحديث العناصر فقط إذا كانت موجودة
+        updatePrayerTime(`fajr-${cityKey}`, timings.Fajr);
+        updatePrayerTime(`dhuhr-${cityKey}`, timings.Dhuhr);
+        updatePrayerTime(`asr-${cityKey}`, timings.Asr);
+        updatePrayerTime(`maghrib-${cityKey}`, timings.Maghrib);
+        updatePrayerTime(`isha-${cityKey}`, timings.Isha);
 
-        // ✅ حساب أقرب صلاة
+        // حساب وتحديث الصلاة القادمة
         calculateNextPrayer(cityKey, timings);
     } catch (error) {
-        console.error(`❌ خطأ في جلب مواقيت الصلاة لـ ${cityKey}`, error);
-        document.getElementById(`next-prayer-${cityKey}`).innerText = "⚠️ تعذر جلب البيانات";
+        console.error(`❌ خطأ في جلب مواقيت الصلاة لـ ${cities[cityKey].arabicName}:`, error);
+        const elements = ['fajr', 'dhuhr', 'asr', 'maghrib', 'isha'].map(prayer => 
+            document.getElementById(`${prayer}-${cityKey}`)
+        );
+        elements.forEach(element => {
+            if (element) element.innerText = "⚠️ تعذر جلب البيانات";
+        });
+    }
+}
+
+// ✅ تحديث وقت الصلاة في العنصر المحدد
+function updatePrayerTime(elementId, time) {
+    const element = document.getElementById(elementId);
+    if (element) {
+        element.innerText = formatTime(time);
     }
 }
 
 // ✅ تحويل الوقت إلى تنسيق 12 ساعة مع "صباحًا" و"مساءً"
 function formatTime(time) {
+    if (!time) return "⚠️ غير متوفر";
+    
     let [hours, minutes] = time.split(":").map(Number);
     let suffix = hours >= 12 ? "مساءً" : "صباحًا";
     hours = hours % 12 || 12;
@@ -66,7 +90,11 @@ function formatTime(time) {
 // ✅ حساب أقرب صلاة وعرضها
 function calculateNextPrayer(cityKey, timings) {
     const now = new Date();
-    const prayerTimes = [
+    const currentHour = now.getHours();
+    const currentMinute = now.getMinutes();
+    const currentTime = currentHour * 60 + currentMinute;
+
+    const prayers = [
         { name: "الفجر", time: timings.Fajr },
         { name: "الظهر", time: timings.Dhuhr },
         { name: "العصر", time: timings.Asr },
@@ -74,27 +102,43 @@ function calculateNextPrayer(cityKey, timings) {
         { name: "العشاء", time: timings.Isha }
     ];
 
-    let nextPrayer = "❌ غير محدد";
-    let nextTimeDiff = Infinity;
+    let nextPrayer = null;
+    let minDiff = Infinity;
 
-    prayerTimes.forEach(prayer => {
-        const [hours, minutes] = prayer.time.split(":").map(Number);
-        const prayerTime = new Date(now);
-        prayerTime.setHours(hours, minutes, 0);
-
-        const timeDiff = (prayerTime - now) / 1000; // تحويل الفرق إلى ثواني
-        if (timeDiff > 0 && timeDiff < nextTimeDiff) {
-            nextTimeDiff = timeDiff;
-            nextPrayer = `${prayer.name} بعد ${Math.floor(timeDiff / 3600)} ساعة و ${Math.floor((timeDiff % 3600) / 60)} دقيقة و ${Math.floor(timeDiff % 60)} ثانية`;
+    prayers.forEach(prayer => {
+        const [prayerHour, prayerMinute] = prayer.time.split(":").map(Number);
+        const prayerTime = prayerHour * 60 + prayerMinute;
+        
+        let diff = prayerTime - currentTime;
+        if (diff < 0) diff += 24 * 60; // إذا كان الوقت قد مر، أضف 24 ساعة
+        
+        if (diff < minDiff) {
+            minDiff = diff;
+            nextPrayer = {
+                name: prayer.name,
+                hours: Math.floor(diff / 60),
+                minutes: diff % 60
+            };
         }
     });
 
-    document.getElementById(`next-prayer-${cityKey}`).innerText = nextPrayer;
+    const nextPrayerElement = document.getElementById(`next-prayer-${cityKey}`);
+    if (nextPrayerElement && nextPrayer) {
+        nextPrayerElement.innerText = `${nextPrayer.name} بعد ${nextPrayer.hours} ساعة و ${nextPrayer.minutes} دقيقة`;
+    }
 }
 
-// ✅ تحديث مواقيت الصلاة كل ثانية
+// ✅ تحديث مواقيت الصلاة كل دقيقة
 function updateAllPrayerTimes() {
-    Object.keys(cities).forEach(fetchPrayerTimes);
+    Object.keys(cities).forEach(cityKey => {
+        const currentPath = window.location.pathname;
+        const cityPage = currentPath.includes(cityKey);
+        if (cityPage || currentPath === "/" || currentPath.endsWith("index.html")) {
+            fetchPrayerTimes(cityKey);
+        }
+    });
 }
-setInterval(updateAllPrayerTimes, 1000);
+
+// التحديث الأولي ثم كل دقيقة
 updateAllPrayerTimes();
+setInterval(updateAllPrayerTimes, 60000);
