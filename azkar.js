@@ -1,52 +1,43 @@
-const AZKAR_API = "https://raw.githubusercontent.com/nawafalqari/azkar-api/56df51279ab6eb86dc2f6202c7de26c8948331c1/azkar.json";
+// استيراد إعدادات Firebase
+import { database } from "./firebase-config.js";
+import { ref, onValue } from "https://www.gstatic.com/firebasejs/10.7.1/firebase-database.js";
 
-document.addEventListener("DOMContentLoaded", function() {
-    const azkarContent = document.getElementById("azkar-content");
-    const nextButton = document.getElementById("next-zekr");
-    const prevButton = document.getElementById("prev-zekr");
-    
-    let azkar = [];
-    let currentZekrIndex = 0;
+document.addEventListener("DOMContentLoaded", function () {
+    const azkarContainer = document.getElementById("azkar-container");
 
-    // تحميل الأذكار
-    async function loadAzkar() {
-        try {
-            const response = await fetch(AZKAR_API);
-            const data = await response.json();
-            azkar = Object.values(data).flat();
-            displayZekr();
-        } catch (error) {
-            console.error("خطأ في تحميل الأذكار:", error);
-            azkarContent.innerHTML = "حدث خطأ في تحميل الأذكار";
-        }
+    function fetchAzkar() {
+        const azkarRef = ref(database, "azkar");
+
+        onValue(azkarRef, (snapshot) => {
+            azkarContainer.innerHTML = ""; // مسح المحتوى القديم قبل تحميل الجديد
+
+            if (!snapshot.exists()) {
+                azkarContainer.innerHTML = "<p>❌ لا توجد أذكار متاحة.</p>";
+                return;
+            }
+
+            snapshot.forEach(childSnapshot => {
+                const zekr = childSnapshot.val();
+
+                // إنشاء عنصر لعرض الذكر
+                const zekrCard = document.createElement("div");
+                zekrCard.classList.add("azkar-card");
+
+                const title = document.createElement("h3");
+                title.innerText = zekr.title;
+
+                const content = document.createElement("p");
+                content.innerText = zekr.content;
+
+                zekrCard.appendChild(title);
+                zekrCard.appendChild(content);
+                azkarContainer.appendChild(zekrCard);
+            });
+        }, (error) => {
+            console.error("❌ خطأ أثناء تحميل الأذكار:", error);
+            azkarContainer.innerHTML = "<p>⚠️ حدث خطأ أثناء تحميل الأذكار.</p>";
+        });
     }
 
-    // عرض الذكر الحالي
-    function displayZekr() {
-        if (azkar.length === 0) return;
-        
-        const zekr = azkar[currentZekrIndex];
-        azkarContent.innerHTML = `
-            <p class="zekr-text">${zekr.content}</p>
-            <p class="zekr-count">عدد المرات: ${zekr.count}</p>
-        `;
-    }
-
-    // الانتقال للذكر التالي
-    nextButton.addEventListener("click", () => {
-        if (currentZekrIndex < azkar.length - 1) {
-            currentZekrIndex++;
-            displayZekr();
-        }
-    });
-
-    // الانتقال للذكر السابق
-    prevButton.addEventListener("click", () => {
-        if (currentZekrIndex > 0) {
-            currentZekrIndex--;
-            displayZekr();
-        }
-    });
-
-    loadAzkar();
+    fetchAzkar();
 });
