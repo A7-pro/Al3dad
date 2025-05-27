@@ -34,6 +34,38 @@
             </div>
         </section>
 
+        <section id="islamic-content">
+            <div class="content-grid">
+                <div class="content-box quran-section">
+                    <h2>📖 القرآن الكريم</h2>
+                    <select id="surah-select">
+                        <option value="">اختر السورة</option>
+                    </select>
+                    <div id="surah-content" class="content-display"></div>
+                </div>
+
+                <div class="content-box hadith-section">
+                    <h2>📚 الأحاديث النبوية</h2>
+                    <div id="hadith-content" class="content-display"></div>
+                    <button id="next-hadith" class="nav-button">الحديث التالي</button>
+                </div>
+
+                <div class="content-box azkar-section">
+                    <h2>📿 الأذكار</h2>
+                    <div id="azkar-content" class="content-display"></div>
+                    <button id="next-zekr" class="nav-button">الذكر التالي</button>
+                </div>
+
+                <div class="content-box radio-section">
+                    <h2>📻 إذاعة القرآن</h2>
+                    <select id="reciter-select">
+                        <option value="">اختر القارئ</option>
+                    </select>
+                    <audio id="radio-player" controls></audio>
+                </div>
+            </div>
+        </section>
+
         <section id="kahf-download">
             <h2>📖 تحميل سورة الكهف</h2>
             <a href="الكهف.pdf" class="download-button" download>📥 تحميل سورة الكهف</a>
